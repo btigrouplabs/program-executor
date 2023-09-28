@@ -44,7 +44,7 @@ valid signers of the transaction for the instruction to succeed.
 This section details expected log output for memo instructions.
 
 Logging begins with entry into the program:
-`Program MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr invoke [1]`
+`Program MemosCjqhjT9bpSaHsMNprpRfwbGZucMSUMGAyTJ6bf invoke [1]`
 
 The program will include a separate log for each verified signer:
 `Program log: Signed by <BASE_58_ADDRESS>`
@@ -56,9 +56,9 @@ If UTF-8 parsing fails, the program will log the failure point:
 `Program log: Invalid UTF-8, from byte 4`
 
 Logging ends with the status of the instruction, one of:
-`Program MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr success`
-`Program MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr failed: missing required signature for instruction`
-`Program MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr failed: invalid instruction data`
+`Program MemosCjqhjT9bpSaHsMNprpRfwbGZucMSUMGAyTJ6bf success`
+`Program MemosCjqhjT9bpSaHsMNprpRfwbGZucMSUMGAyTJ6bf failed: missing required signature for instruction`
+`Program MemosCjqhjT9bpSaHsMNprpRfwbGZucMSUMGAyTJ6bf failed: invalid instruction data`
 
 For more information about exposing program logs on a node, head to the
 [developer
