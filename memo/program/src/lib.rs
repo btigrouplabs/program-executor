@@ -15,7 +15,7 @@ use solana_program::{
 
 /// Legacy symbols from Memo v1
 pub mod v1 {
-    solana_program::declare_id!("Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo");
+    solana_program::declare_id!("MemofAnkfSSA4zXtrw6hNggSveMfumnviTQUtjEjs7q");
 }
 
 solana_program::declare_id!("MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr");
