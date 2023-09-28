@@ -1,9 +1,9 @@
 [package]
 name = "spl-memo"
 version = "3.0.1"
-description = "Solana Program Library Memo"
-authors = ["Solana Labs Maintainers <maintainers@solanalabs.com>"]
-repository = "https://github.com/solana-labs/solana-program-library"
+description = "BBACHAIN Program Library Memo"
+authors = ["Maintainers <maintainers@bbachain.com>"]
+repository = "https://github.com/BTI-Labs/program-library"
 license = "Apache-2.0"
 edition = "2021"
 
