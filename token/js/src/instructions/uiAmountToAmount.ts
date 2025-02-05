@@ -1,6 +1,6 @@
-import { blob, struct, u8 } from '@solana/buffer-layout';
-import type { AccountMeta, PublicKey } from '@solana/web3.js';
-import { TransactionInstruction } from '@solana/web3.js';
+import { blob, struct, u8 } from '@bbachain/buffer-layout';
+import type { AccountMeta, PublicKey } from '@bbachain/web3.js';
+import { TransactionInstruction } from '@bbachain/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants.js';
 import {
     TokenInvalidInstructionDataError,

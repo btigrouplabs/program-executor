@@ -2,8 +2,8 @@ import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 
-import type { Connection, PublicKey, Signer } from '@solana/web3.js';
-import { sendAndConfirmTransaction, Keypair, SystemProgram, Transaction } from '@solana/web3.js';
+import type { Connection, PublicKey, Signer } from '@bbachain/web3.js';
+import { sendAndConfirmTransaction, Keypair, SystemProgram, Transaction } from '@bbachain/web3.js';
 import {
     createAccount,
     createInitializeMintInstruction,
@@ -14,7 +14,7 @@ import {
     burn,
     transferChecked,
 } from '../../src';
-import { TEST_PROGRAM_ID, newAccountWithLamports, getConnection } from '../common';
+import { TEST_PROGRAM_ID, newAccountWithDaltons, getConnection } from '../common';
 
 const TEST_TOKEN_DECIMALS = 0;
 const EXTENSIONS = [ExtensionType.PermanentDelegate];
@@ -28,7 +28,7 @@ describe('permanentDelegate', () => {
     let destination: PublicKey;
     before(async () => {
         connection = await getConnection();
-        payer = await newAccountWithLamports(connection, 1000000000);
+        payer = await newAccountWithDaltons(connection, 1000000000);
         mintAuthority = Keypair.generate();
         permanentDelegate = Keypair.generate();
     });
@@ -36,13 +36,13 @@ describe('permanentDelegate', () => {
         const mintKeypair = Keypair.generate();
         mint = mintKeypair.publicKey;
         const mintLen = getMintLen(EXTENSIONS);
-        const lamports = await connection.getMinimumBalanceForRentExemption(mintLen);
+        const daltons = await connection.getMinimumBalanceForRentExemption(mintLen);
         const transaction = new Transaction().add(
             SystemProgram.createAccount({
                 fromPubkey: payer.publicKey,
                 newAccountPubkey: mint,
                 space: mintLen,
-                lamports,
+                daltons,
                 programId: TEST_PROGRAM_ID,
             }),
             createInitializePermanentDelegateInstruction(mint, permanentDelegate.publicKey, TEST_PROGRAM_ID),

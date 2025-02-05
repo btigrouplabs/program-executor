@@ -1,5 +1,5 @@
-import type { ConfirmOptions, Connection, PublicKey, Signer } from '@solana/web3.js';
-import { Keypair, sendAndConfirmTransaction, SystemProgram, Transaction } from '@solana/web3.js';
+import type { ConfirmOptions, Connection, PublicKey, Signer } from '@bbachain/web3.js';
+import { Keypair, sendAndConfirmTransaction, SystemProgram, Transaction } from '@bbachain/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants.js';
 import { createInitializeMultisigInstruction } from '../instructions/initializeMultisig.js';
 import { getMinimumBalanceForRentExemptMultisig, MULTISIG_SIZE } from '../state/multisig.js';
@@ -26,14 +26,14 @@ export async function createMultisig(
     confirmOptions?: ConfirmOptions,
     programId = TOKEN_PROGRAM_ID
 ): Promise<PublicKey> {
-    const lamports = await getMinimumBalanceForRentExemptMultisig(connection);
+    const daltons = await getMinimumBalanceForRentExemptMultisig(connection);
 
     const transaction = new Transaction().add(
         SystemProgram.createAccount({
             fromPubkey: payer.publicKey,
             newAccountPubkey: keypair.publicKey,
             space: MULTISIG_SIZE,
-            lamports,
+            daltons,
             programId,
         }),
         createInitializeMultisigInstruction(keypair.publicKey, signers, m, programId)

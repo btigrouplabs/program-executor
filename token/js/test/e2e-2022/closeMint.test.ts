@@ -2,8 +2,8 @@ import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 
-import type { Connection, PublicKey, Signer } from '@solana/web3.js';
-import { sendAndConfirmTransaction, Keypair, SystemProgram, Transaction } from '@solana/web3.js';
+import type { Connection, PublicKey, Signer } from '@bbachain/web3.js';
+import { sendAndConfirmTransaction, Keypair, SystemProgram, Transaction } from '@bbachain/web3.js';
 import {
     createAccount,
     createInitializeMintInstruction,
@@ -13,7 +13,7 @@ import {
     getMintLen,
     ExtensionType,
 } from '../../src';
-import { TEST_PROGRAM_ID, newAccountWithLamports, getConnection } from '../common';
+import { TEST_PROGRAM_ID, newAccountWithDaltons, getConnection } from '../common';
 
 const TEST_TOKEN_DECIMALS = 2;
 const EXTENSIONS = [ExtensionType.MintCloseAuthority];
@@ -27,7 +27,7 @@ describe('closeMint', () => {
     let destination: PublicKey;
     before(async () => {
         connection = await getConnection();
-        payer = await newAccountWithLamports(connection, 1000000000);
+        payer = await newAccountWithDaltons(connection, 1000000000);
         mintAuthority = Keypair.generate();
         closeAuthority = Keypair.generate();
     });
@@ -35,14 +35,14 @@ describe('closeMint', () => {
         const mintKeypair = Keypair.generate();
         mint = mintKeypair.publicKey;
         const mintLen = getMintLen(EXTENSIONS);
-        const lamports = await connection.getMinimumBalanceForRentExemption(mintLen);
+        const daltons = await connection.getMinimumBalanceForRentExemption(mintLen);
 
         const transaction = new Transaction().add(
             SystemProgram.createAccount({
                 fromPubkey: payer.publicKey,
                 newAccountPubkey: mint,
                 space: mintLen,
-                lamports,
+                daltons,
                 programId: TEST_PROGRAM_ID,
             }),
             createInitializeMintCloseAuthorityInstruction(mint, closeAuthority.publicKey, TEST_PROGRAM_ID),
@@ -66,7 +66,7 @@ describe('closeMint', () => {
         let rentExemptAmount;
         expect(accountInfo).to.not.be.null;
         if (accountInfo !== null) {
-            rentExemptAmount = accountInfo.lamports;
+            rentExemptAmount = accountInfo.daltons;
         }
 
         await closeAccount(connection, payer, mint, destination, closeAuthority, [], undefined, TEST_PROGRAM_ID);
@@ -77,7 +77,7 @@ describe('closeMint', () => {
         const destinationInfo = await connection.getAccountInfo(destination);
         expect(destinationInfo).to.not.be.null;
         if (destinationInfo !== null) {
-            expect(destinationInfo.lamports).to.eql(rentExemptAmount);
+            expect(destinationInfo.daltons).to.eql(rentExemptAmount);
         }
     });
 });

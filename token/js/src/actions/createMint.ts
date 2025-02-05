@@ -1,5 +1,5 @@
-import type { ConfirmOptions, Connection, PublicKey, Signer } from '@solana/web3.js';
-import { Keypair, sendAndConfirmTransaction, SystemProgram, Transaction } from '@solana/web3.js';
+import type { ConfirmOptions, Connection, PublicKey, Signer } from '@bbachain/web3.js';
+import { Keypair, sendAndConfirmTransaction, SystemProgram, Transaction } from '@bbachain/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants.js';
 import { createInitializeMint2Instruction } from '../instructions/initializeMint2.js';
 import { getMinimumBalanceForRentExemptMint, MINT_SIZE } from '../state/mint.js';
@@ -28,14 +28,14 @@ export async function createMint(
     confirmOptions?: ConfirmOptions,
     programId = TOKEN_PROGRAM_ID
 ): Promise<PublicKey> {
-    const lamports = await getMinimumBalanceForRentExemptMint(connection);
+    const daltons = await getMinimumBalanceForRentExemptMint(connection);
 
     const transaction = new Transaction().add(
         SystemProgram.createAccount({
             fromPubkey: payer.publicKey,
             newAccountPubkey: keypair.publicKey,
             space: MINT_SIZE,
-            lamports,
+            daltons,
             programId,
         }),
         createInitializeMint2Instruction(keypair.publicKey, decimals, mintAuthority, freezeAuthority, programId)

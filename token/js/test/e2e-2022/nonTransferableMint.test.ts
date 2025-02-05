@@ -2,8 +2,8 @@ import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 
-import type { Connection, PublicKey, Signer } from '@solana/web3.js';
-import { sendAndConfirmTransaction, Keypair, SystemProgram, Transaction } from '@solana/web3.js';
+import type { Connection, PublicKey, Signer } from '@bbachain/web3.js';
+import { sendAndConfirmTransaction, Keypair, SystemProgram, Transaction } from '@bbachain/web3.js';
 import {
     createInitializeMintInstruction,
     createInitializeNonTransferableMintInstruction,
@@ -17,7 +17,7 @@ import {
     transfer,
     ExtensionType,
 } from '../../src';
-import { TEST_PROGRAM_ID, newAccountWithLamports, getConnection } from '../common';
+import { TEST_PROGRAM_ID, newAccountWithDaltons, getConnection } from '../common';
 
 const TEST_TOKEN_DECIMALS = 2;
 const EXTENSIONS = [ExtensionType.NonTransferable];
@@ -28,21 +28,21 @@ describe('nonTransferable', () => {
     let mintAuthority: Keypair;
     before(async () => {
         connection = await getConnection();
-        payer = await newAccountWithLamports(connection, 1000000000);
+        payer = await newAccountWithDaltons(connection, 1000000000);
         mintAuthority = Keypair.generate();
     });
     beforeEach(async () => {
         const mintKeypair = Keypair.generate();
         mint = mintKeypair.publicKey;
         const mintLen = getMintLen(EXTENSIONS);
-        const lamports = await connection.getMinimumBalanceForRentExemption(mintLen);
+        const daltons = await connection.getMinimumBalanceForRentExemption(mintLen);
 
         const transaction = new Transaction().add(
             SystemProgram.createAccount({
                 fromPubkey: payer.publicKey,
                 newAccountPubkey: mint,
                 space: mintLen,
-                lamports,
+                daltons,
                 programId: TEST_PROGRAM_ID,
             }),
             createInitializeNonTransferableMintInstruction(mint, TEST_PROGRAM_ID),
@@ -58,7 +58,7 @@ describe('nonTransferable', () => {
 
         const owner = Keypair.generate();
         const accountLen = getAccountLen([ExtensionType.ImmutableOwner, ExtensionType.NonTransferableAccount]);
-        const lamports = await connection.getMinimumBalanceForRentExemption(accountLen);
+        const daltons = await connection.getMinimumBalanceForRentExemption(accountLen);
 
         const sourceKeypair = Keypair.generate();
         const source = sourceKeypair.publicKey;
@@ -67,7 +67,7 @@ describe('nonTransferable', () => {
                 fromPubkey: payer.publicKey,
                 newAccountPubkey: source,
                 space: accountLen,
-                lamports,
+                daltons,
                 programId: TEST_PROGRAM_ID,
             }),
             createInitializeImmutableOwnerInstruction(source, TEST_PROGRAM_ID),
@@ -82,7 +82,7 @@ describe('nonTransferable', () => {
                 fromPubkey: payer.publicKey,
                 newAccountPubkey: destination,
                 space: accountLen,
-                lamports,
+                daltons,
                 programId: TEST_PROGRAM_ID,
             }),
             createInitializeImmutableOwnerInstruction(destination, TEST_PROGRAM_ID),

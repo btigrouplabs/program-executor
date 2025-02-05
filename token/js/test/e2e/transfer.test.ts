@@ -2,8 +2,8 @@ import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 
-import type { Connection, PublicKey, Signer } from '@solana/web3.js';
-import { Keypair } from '@solana/web3.js';
+import type { Connection, PublicKey, Signer } from '@bbachain/web3.js';
+import { Keypair } from '@bbachain/web3.js';
 
 import {
     createMint,
@@ -17,7 +17,7 @@ import {
     revoke,
 } from '../../src';
 
-import { TEST_PROGRAM_ID, newAccountWithLamports, getConnection } from '../common';
+import { TEST_PROGRAM_ID, newAccountWithDaltons, getConnection } from '../common';
 
 const TEST_TOKEN_DECIMALS = 2;
 describe('transfer', () => {
@@ -32,7 +32,7 @@ describe('transfer', () => {
     let amount: bigint;
     before(async () => {
         connection = await getConnection();
-        payer = await newAccountWithLamports(connection, 1000000000);
+        payer = await newAccountWithDaltons(connection, 1000000000);
         mintAuthority = Keypair.generate();
         const mintKeypair = Keypair.generate();
         mint = await createMint(

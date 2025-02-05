@@ -1,10 +1,10 @@
-import type { ConfirmOptions, Connection, PublicKey, Signer, TransactionSignature } from '@solana/web3.js';
-import { sendAndConfirmTransaction, Transaction } from '@solana/web3.js';
+import type { ConfirmOptions, Connection, PublicKey, Signer, TransactionSignature } from '@bbachain/web3.js';
+import { sendAndConfirmTransaction, Transaction } from '@bbachain/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants.js';
 import { createSyncNativeInstruction } from '../instructions/syncNative.js';
 
 /**
- * Sync the balance of a native SPL token account to the underlying system account's lamports
+ * Sync the balance of a native SPL token account to the underlying system account's daltons
  *
  * @param connection     Connection to use
  * @param payer          Payer of the transaction fees

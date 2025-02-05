@@ -1,5 +1,5 @@
-import type { Commitment, ConfirmOptions, Connection, PublicKey, Signer } from '@solana/web3.js';
-import { sendAndConfirmTransaction, Transaction } from '@solana/web3.js';
+import type { Commitment, ConfirmOptions, Connection, PublicKey, Signer } from '@bbachain/web3.js';
+import { sendAndConfirmTransaction, Transaction } from '@bbachain/web3.js';
 import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID } from '../constants.js';
 import {
     TokenAccountNotFoundError,
@@ -52,7 +52,7 @@ export async function getOrCreateAssociatedTokenAccount(
     try {
         account = await getAccount(connection, associatedToken, commitment, programId);
     } catch (error: unknown) {
-        // TokenAccountNotFoundError can be possible if the associated address has already received some lamports,
+        // TokenAccountNotFoundError can be possible if the associated address has already received some daltons,
         // becoming a system account. Assuming program derived addressing is safe, this is the only case for the
         // TokenInvalidAccountOwnerError in this code path.
         if (error instanceof TokenAccountNotFoundError || error instanceof TokenInvalidAccountOwnerError) {

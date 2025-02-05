@@ -1,6 +1,6 @@
-import { struct, u8 } from '@solana/buffer-layout';
-import type { PublicKey } from '@solana/web3.js';
-import { TransactionInstruction } from '@solana/web3.js';
+import { struct, u8 } from '@bbachain/buffer-layout';
+import type { PublicKey } from '@bbachain/web3.js';
+import { TransactionInstruction } from '@bbachain/web3.js';
 import { programSupportsExtensions } from '../constants.js';
 import { TokenUnsupportedInstructionError } from '../errors.js';
 import { TokenInstruction } from './types.js';

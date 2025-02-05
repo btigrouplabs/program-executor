@@ -1,5 +1,5 @@
-import type { ConfirmOptions, Connection, Signer } from '@solana/web3.js';
-import { sendAndConfirmTransaction, Transaction } from '@solana/web3.js';
+import type { ConfirmOptions, Connection, Signer } from '@bbachain/web3.js';
+import { sendAndConfirmTransaction, Transaction } from '@bbachain/web3.js';
 import { NATIVE_MINT_2022, TOKEN_2022_PROGRAM_ID } from '../constants.js';
 import { createCreateNativeMintInstruction } from '../instructions/createNativeMint.js';
 

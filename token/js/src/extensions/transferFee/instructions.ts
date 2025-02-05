@@ -1,7 +1,7 @@
-import { struct, u16, u8 } from '@solana/buffer-layout';
-import { publicKey, u64 } from '@solana/buffer-layout-utils';
-import type { AccountMeta, Signer } from '@solana/web3.js';
-import { PublicKey, TransactionInstruction } from '@solana/web3.js';
+import { struct, u16, u8 } from '@bbachain/buffer-layout';
+import { publicKey, u64 } from '@bbachain/buffer-layout-utils';
+import type { AccountMeta, Signer } from '@bbachain/web3.js';
+import { PublicKey, TransactionInstruction } from '@bbachain/web3.js';
 import { programSupportsExtensions, TOKEN_2022_PROGRAM_ID } from '../../constants.js';
 import {
     TokenInvalidInstructionDataError,

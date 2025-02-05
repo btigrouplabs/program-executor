@@ -2,10 +2,10 @@ import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 
-import type { Connection, PublicKey, Signer } from '@solana/web3.js';
-import { Keypair } from '@solana/web3.js';
+import type { Connection, PublicKey, Signer } from '@bbachain/web3.js';
+import { Keypair } from '@bbachain/web3.js';
 import { createMint, createAccount, closeAccount, mintTo } from '../../src';
-import { TEST_PROGRAM_ID, newAccountWithLamports, getConnection } from '../common';
+import { TEST_PROGRAM_ID, newAccountWithDaltons, getConnection } from '../common';
 
 const TEST_TOKEN_DECIMALS = 2;
 describe('close', () => {
@@ -19,7 +19,7 @@ describe('close', () => {
     let destination: PublicKey;
     before(async () => {
         connection = await getConnection();
-        payer = await newAccountWithLamports(connection, 1000000000);
+        payer = await newAccountWithDaltons(connection, 1000000000);
         mintAuthority = Keypair.generate();
         freezeAuthority = Keypair.generate();
         const mintKeypair = Keypair.generate();
@@ -50,7 +50,7 @@ describe('close', () => {
         let tokenRentExemptAmount;
         expect(accountInfo).to.not.be.null;
         if (accountInfo !== null) {
-            tokenRentExemptAmount = accountInfo.lamports;
+            tokenRentExemptAmount = accountInfo.daltons;
         }
 
         await closeAccount(connection, payer, account, destination, owner, [], undefined, TEST_PROGRAM_ID);
@@ -61,7 +61,7 @@ describe('close', () => {
         const destinationInfo = await connection.getAccountInfo(destination);
         expect(destinationInfo).to.not.be.null;
         if (destinationInfo !== null) {
-            expect(destinationInfo.lamports).to.eql(tokenRentExemptAmount);
+            expect(destinationInfo.daltons).to.eql(tokenRentExemptAmount);
         }
     });
 });

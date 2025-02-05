@@ -2,8 +2,8 @@ import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 
-import type { Connection, PublicKey, Signer } from '@solana/web3.js';
-import { sendAndConfirmTransaction, Keypair, SystemProgram, Transaction } from '@solana/web3.js';
+import type { Connection, PublicKey, Signer } from '@bbachain/web3.js';
+import { sendAndConfirmTransaction, Keypair, SystemProgram, Transaction } from '@bbachain/web3.js';
 
 import type { Account, Mint } from '../../src';
 import {
@@ -15,7 +15,7 @@ import {
     getExtensionData,
     isAccountExtension,
 } from '../../src';
-import { TEST_PROGRAM_ID, newAccountWithLamports, getConnection } from '../common';
+import { TEST_PROGRAM_ID, newAccountWithDaltons, getConnection } from '../common';
 
 const TEST_TOKEN_DECIMALS = 9;
 const ACCOUNT_EXTENSIONS = Object.values(ExtensionType)
@@ -29,7 +29,7 @@ describe('tlv test', () => {
 
     before(async () => {
         connection = await getConnection();
-        payer = await newAccountWithLamports(connection, 1000000000);
+        payer = await newAccountWithDaltons(connection, 1000000000);
         owner = Keypair.generate();
     });
 
@@ -40,7 +40,7 @@ describe('tlv test', () => {
             const accountKeypair = Keypair.generate();
             const account = accountKeypair.publicKey;
             const accountLen = getAccountLen([]) + extraBytes;
-            const lamports = await connection.getMinimumBalanceForRentExemption(accountLen);
+            const daltons = await connection.getMinimumBalanceForRentExemption(accountLen);
 
             const mint = await createMint(
                 connection,
@@ -58,7 +58,7 @@ describe('tlv test', () => {
                     fromPubkey: payer.publicKey,
                     newAccountPubkey: account,
                     space: accountLen,
-                    lamports,
+                    daltons,
                     programId: TEST_PROGRAM_ID,
                 }),
                 createInitializeAccountInstruction(account, mint, owner.publicKey, TEST_PROGRAM_ID)

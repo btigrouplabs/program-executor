@@ -1,6 +1,6 @@
-import { struct, u8 } from '@solana/buffer-layout';
-import { bool, publicKey } from '@solana/buffer-layout-utils';
-import type { AccountInfo, Commitment, Connection, PublicKey } from '@solana/web3.js';
+import { struct, u8 } from '@bbachain/buffer-layout';
+import { bool, publicKey } from '@bbachain/buffer-layout-utils';
+import type { AccountInfo, Commitment, Connection, PublicKey } from '@bbachain/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants.js';
 import { TokenAccountNotFoundError, TokenInvalidAccountOwnerError, TokenInvalidAccountSizeError } from '../errors.js';
 
@@ -100,7 +100,7 @@ export function unpackMultisig(
  * @param connection Connection to use
  * @param commitment Desired level of commitment for querying the state
  *
- * @return Amount of lamports required
+ * @return Amount of daltons required
  */
 export async function getMinimumBalanceForRentExemptMultisig(
     connection: Connection,

@@ -1,6 +1,6 @@
-import { struct, u32, u8 } from '@solana/buffer-layout';
-import { publicKey, u64 } from '@solana/buffer-layout-utils';
-import type { AccountInfo, Commitment, Connection, PublicKey } from '@solana/web3.js';
+import { struct, u32, u8 } from '@bbachain/buffer-layout';
+import { publicKey, u64 } from '@bbachain/buffer-layout-utils';
+import type { AccountInfo, Commitment, Connection, PublicKey } from '@bbachain/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants.js';
 import {
     TokenAccountNotFoundError,
@@ -128,7 +128,7 @@ export async function getMultipleAccounts(
  * @param connection Connection to use
  * @param commitment Desired level of commitment for querying the state
  *
- * @return Amount of lamports required
+ * @return Amount of daltons required
  */
 export async function getMinimumBalanceForRentExemptAccount(
     connection: Connection,
@@ -142,7 +142,7 @@ export async function getMinimumBalanceForRentExemptAccount(
  * @param connection Connection to use
  * @param commitment Desired level of commitment for querying the state
  *
- * @return Amount of lamports required
+ * @return Amount of daltons required
  */
 export async function getMinimumBalanceForRentExemptAccountWithExtensions(
     connection: Connection,

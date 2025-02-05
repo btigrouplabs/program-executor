@@ -1,5 +1,5 @@
-import type { ConfirmOptions, Connection, Keypair, PublicKey, Signer } from '@solana/web3.js';
-import { sendAndConfirmTransaction, SystemProgram, Transaction } from '@solana/web3.js';
+import type { ConfirmOptions, Connection, Keypair, PublicKey, Signer } from '@bbachain/web3.js';
+import { sendAndConfirmTransaction, SystemProgram, Transaction } from '@bbachain/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants.js';
 import { getAccountLenForMint } from '../extensions/extensionType.js';
 import { createInitializeAccountInstruction } from '../instructions/initializeAccount.js';
@@ -34,14 +34,14 @@ export async function createAccount(
     // Otherwise, create the account with the provided keypair and return its public key
     const mintState = await getMint(connection, mint, confirmOptions?.commitment, programId);
     const space = getAccountLenForMint(mintState);
-    const lamports = await connection.getMinimumBalanceForRentExemption(space);
+    const daltons = await connection.getMinimumBalanceForRentExemption(space);
 
     const transaction = new Transaction().add(
         SystemProgram.createAccount({
             fromPubkey: payer.publicKey,
             newAccountPubkey: keypair.publicKey,
             space,
-            lamports,
+            daltons,
             programId,
         }),
         createInitializeAccountInstruction(keypair.publicKey, mint, owner, programId)

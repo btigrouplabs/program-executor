@@ -1,5 +1,5 @@
-import type { Connection, PublicKey, Signer } from '@solana/web3.js';
-import { Keypair } from '@solana/web3.js';
+import type { Connection, PublicKey, Signer } from '@bbachain/web3.js';
+import { Keypair } from '@bbachain/web3.js';
 
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
@@ -15,13 +15,13 @@ import {
     getAssociatedTokenAddress,
 } from '../../src';
 
-import { TEST_PROGRAM_ID, newAccountWithLamports, getConnection } from '../common';
+import { TEST_PROGRAM_ID, newAccountWithDaltons, getConnection } from '../common';
 
 const TEST_TOKEN_DECIMALS = 2;
 describe('createMint', () => {
     it('works', async () => {
         const connection = await getConnection();
-        const payer = await newAccountWithLamports(connection, 1000000000);
+        const payer = await newAccountWithDaltons(connection, 1000000000);
         const testMintAuthority = Keypair.generate();
         const mintKeypair = Keypair.generate();
         const mint = await createMint(
@@ -51,7 +51,7 @@ describe('createAccount', () => {
     let mint: PublicKey;
     before(async () => {
         connection = await getConnection();
-        payer = await newAccountWithLamports(connection, 1000000000);
+        payer = await newAccountWithDaltons(connection, 1000000000);
         const mintAuthority = Keypair.generate();
         const mintKeypair = Keypair.generate();
         mint = await createMint(

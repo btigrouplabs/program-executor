@@ -1,6 +1,6 @@
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey } from '@bbachain/web3.js';
 import {
     AccountState,
     createCreateNativeMintInstruction,

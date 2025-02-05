@@ -1,5 +1,5 @@
-import type { ConfirmOptions, Connection, Keypair, PublicKey, Signer } from '@solana/web3.js';
-import { sendAndConfirmTransaction, SystemProgram, Transaction } from '@solana/web3.js';
+import type { ConfirmOptions, Connection, Keypair, PublicKey, Signer } from '@bbachain/web3.js';
+import { sendAndConfirmTransaction, SystemProgram, Transaction } from '@bbachain/web3.js';
 import { ASSOCIATED_TOKEN_PROGRAM_ID, NATIVE_MINT, TOKEN_PROGRAM_ID } from '../constants.js';
 import { createAssociatedTokenAccountInstruction } from '../instructions/associatedTokenAccount.js';
 import { createInitializeAccountInstruction } from '../instructions/initializeAccount.js';
@@ -14,7 +14,7 @@ import { createAccount } from './createAccount.js';
  * @param connection     Connection to use
  * @param payer          Payer of the transaction and initialization fees
  * @param owner          Owner of the new token account
- * @param amount         Number of lamports to wrap
+ * @param amount         Number of daltons to wrap
  * @param keypair        Optional keypair, defaulting to the associated token account for the native mint and `owner`
  * @param confirmOptions Options for confirming the transaction
  * @param programId      SPL Token program account
@@ -56,7 +56,7 @@ export async function createWrappedNativeAccount(
             SystemProgram.transfer({
                 fromPubkey: payer.publicKey,
                 toPubkey: associatedToken,
-                lamports: amount,
+                daltons: amount,
             }),
             createSyncNativeInstruction(associatedToken, programId)
         );
@@ -67,20 +67,20 @@ export async function createWrappedNativeAccount(
     }
 
     // Otherwise, create the account with the provided keypair and return its public key
-    const lamports = await getMinimumBalanceForRentExemptAccount(connection);
+    const daltons = await getMinimumBalanceForRentExemptAccount(connection);
 
     const transaction = new Transaction().add(
         SystemProgram.createAccount({
             fromPubkey: payer.publicKey,
             newAccountPubkey: keypair.publicKey,
             space: ACCOUNT_SIZE,
-            lamports,
+            daltons,
             programId,
         }),
         SystemProgram.transfer({
             fromPubkey: payer.publicKey,
             toPubkey: keypair.publicKey,
-            lamports: amount,
+            daltons: amount,
         }),
         createInitializeAccountInstruction(keypair.publicKey, nativeMint, owner, programId)
     );
