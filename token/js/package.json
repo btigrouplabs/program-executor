@@ -1,6 +1,6 @@
 {
     "name": "@bbachain/spl-token",
-    "version": "0.1.0",
+    "version": "0.1.2",
     "author": "BBAChain Labs <developers@bbachain.com>",
     "repository": "https://github.com/bbachain/program-executor",
     "license": "Apache-2.0",
@@ -19,8 +19,9 @@
     "module": "lib/esm/index.mjs",
     "types": "lib/types/index.d.ts",
     "exports": {
+        "require": "./lib/cjs/index.js",
         "import": "./lib/esm/index.mjs",
-        "require": "./lib/cjs/index.js"
+        "types": "./lib/types/index.d.ts"
     },
     "scripts": {
         "clean": "shx rm -rf lib",
