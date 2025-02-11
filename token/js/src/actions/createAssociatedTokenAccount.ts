@@ -1,4 +1,4 @@
-import { ConfirmOptions, Connection, PublicKey, sendAndConfirmTransaction, Signer, Transaction } from '@solana/web3.js';
+import { ConfirmOptions, Connection, PublicKey, sendAndConfirmTransaction, Signer, Transaction } from '@bbachain/web3.js';
 import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID } from '../constants';
 import { createAssociatedTokenAccountInstruction } from '../instructions/index';
 import { getAssociatedTokenAddress } from '../state/index';

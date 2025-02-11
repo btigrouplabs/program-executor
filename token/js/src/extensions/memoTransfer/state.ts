@@ -1,5 +1,5 @@
-import { struct } from '@solana/buffer-layout';
-import { bool } from '@solana/buffer-layout-utils';
+import { struct } from '@bbachain/buffer-layout';
+import { bool } from '@bbachain/buffer-layout-utils';
 import { Account } from '../../state';
 import { ExtensionType, getExtensionData } from '../extensionType';
 

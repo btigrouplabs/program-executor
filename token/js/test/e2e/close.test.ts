@@ -2,7 +2,7 @@ import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 
-import { Connection, Keypair, PublicKey, Signer } from '@solana/web3.js';
+import { Connection, Keypair, PublicKey, Signer } from '@bbachain/web3.js';
 import { createMint, createAccount, closeAccount, mintTo } from '../../src';
 import { TEST_PROGRAM_ID, newAccountWithLamports, getConnection } from '../common';
 
@@ -49,7 +49,7 @@ describe('close', () => {
         let tokenRentExemptAmount;
         expect(accountInfo).to.not.be.null;
         if (accountInfo !== null) {
-            tokenRentExemptAmount = accountInfo.lamports;
+            tokenRentExemptAmount = accountInfo.daltons;
         }
 
         await closeAccount(connection, payer, account, destination, owner, [], undefined, TEST_PROGRAM_ID);
@@ -60,7 +60,7 @@ describe('close', () => {
         const destinationInfo = await connection.getAccountInfo(destination);
         expect(destinationInfo).to.not.be.null;
         if (destinationInfo !== null) {
-            expect(destinationInfo.lamports).to.eql(tokenRentExemptAmount);
+            expect(destinationInfo.daltons).to.eql(tokenRentExemptAmount);
         }
     });
 });

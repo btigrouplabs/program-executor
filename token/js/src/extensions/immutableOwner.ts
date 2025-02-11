@@ -1,4 +1,4 @@
-import { struct } from '@solana/buffer-layout';
+import { struct } from '@bbachain/buffer-layout';
 import { Account } from '../state/account';
 import { ExtensionType, getExtensionData } from './extensionType';
 

@@ -1,6 +1,6 @@
-import { struct, u32, u8 } from '@solana/buffer-layout';
-import { bool, publicKey, u64 } from '@solana/buffer-layout-utils';
-import { Commitment, Connection, PublicKey } from '@solana/web3.js';
+import { struct, u32, u8 } from '@bbachain/buffer-layout';
+import { bool, publicKey, u64 } from '@bbachain/buffer-layout-utils';
+import { Commitment, Connection, PublicKey } from '@bbachain/web3.js';
 import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID } from '../constants';
 import {
     TokenAccountNotFoundError,
@@ -101,12 +101,12 @@ export async function getMint(
     };
 }
 
-/** Get the minimum lamport balance for a mint to be rent exempt
+/** Get the minimum dalton balance for a mint to be rent exempt
  *
  * @param connection Connection to use
  * @param commitment Desired level of commitment for querying the state
  *
- * @return Amount of lamports required
+ * @return Amount of daltons required
  */
 export async function getMinimumBalanceForRentExemptMint(
     connection: Connection,
@@ -115,13 +115,13 @@ export async function getMinimumBalanceForRentExemptMint(
     return await getMinimumBalanceForRentExemptMintWithExtensions(connection, [], commitment);
 }
 
-/** Get the minimum lamport balance for a rent-exempt mint with extensions
+/** Get the minimum dalton balance for a rent-exempt mint with extensions
  *
  * @param connection Connection to use
  * @param extensions Extension types included in the mint
  * @param commitment Desired level of commitment for querying the state
  *
- * @return Amount of lamports required
+ * @return Amount of daltons required
  */
 export async function getMinimumBalanceForRentExemptMintWithExtensions(
     connection: Connection,

@@ -1,6 +1,6 @@
-import { struct, u16, Layout } from '@solana/buffer-layout';
-import { publicKey, u64 } from '@solana/buffer-layout-utils';
-import { PublicKey } from '@solana/web3.js';
+import { struct, u16, Layout } from '@bbachain/buffer-layout';
+import { publicKey, u64 } from '@bbachain/buffer-layout-utils';
+import { PublicKey } from '@bbachain/web3.js';
 import { Account } from '../../state';
 import { Mint } from '../../state/mint';
 import { ExtensionType, getExtensionData } from '../extensionType';

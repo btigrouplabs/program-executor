@@ -10,7 +10,7 @@ import {
     SystemProgram,
     Transaction,
     sendAndConfirmTransaction,
-} from '@solana/web3.js';
+} from '@bbachain/web3.js';
 
 import {
     ExtensionType,
@@ -67,7 +67,7 @@ describe('transferFee', () => {
                 fromPubkey: payer.publicKey,
                 newAccountPubkey: mint,
                 space: mintLen,
-                lamports: mintLamports,
+                daltons: mintLamports,
                 programId: TEST_PROGRAM_ID,
             }),
             createInitializeTransferFeeConfigInstruction(

@@ -10,8 +10,8 @@ import {
     Signer,
     SystemProgram,
     Transaction,
-} from '@solana/web3.js';
-import { createMemoInstruction } from '@solana/spl-memo';
+} from '@bbachain/web3.js';
+import { createMemoInstruction } from '@bbachain/spl-memo';
 import {
     createAccount,
     createMint,
@@ -72,14 +72,14 @@ describe('memoTransfer', () => {
         const destinationKeypair = Keypair.generate();
         destination = destinationKeypair.publicKey;
         const accountLen = getAccountLen(EXTENSIONS);
-        const lamports = await connection.getMinimumBalanceForRentExemption(accountLen);
+        const daltons = await connection.getMinimumBalanceForRentExemption(accountLen);
 
         const transaction = new Transaction().add(
             SystemProgram.createAccount({
                 fromPubkey: payer.publicKey,
                 newAccountPubkey: destination,
                 space: accountLen,
-                lamports,
+                daltons,
                 programId: TEST_PROGRAM_ID,
             }),
             createInitializeAccountInstruction(destination, mint, owner.publicKey, TEST_PROGRAM_ID),

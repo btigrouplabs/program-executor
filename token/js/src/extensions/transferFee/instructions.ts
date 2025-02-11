@@ -1,6 +1,6 @@
-import { struct, u8, u16 } from '@solana/buffer-layout';
-import { publicKey, u64 } from '@solana/buffer-layout-utils';
-import { AccountMeta, PublicKey, Signer, TransactionInstruction } from '@solana/web3.js';
+import { struct, u8, u16 } from '@bbachain/buffer-layout';
+import { publicKey, u64 } from '@bbachain/buffer-layout-utils';
+import { AccountMeta, PublicKey, Signer, TransactionInstruction } from '@bbachain/web3.js';
 import {
     TokenUnsupportedInstructionError,
     TokenInvalidInstructionDataError,

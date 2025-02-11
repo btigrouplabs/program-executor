@@ -7,7 +7,7 @@ import {
     Signer,
     SystemProgram,
     Transaction,
-} from '@solana/web3.js';
+} from '@bbachain/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants';
 import { createInitializeMintInstruction } from '../instructions/index';
 import { getMinimumBalanceForRentExemptMint, MINT_SIZE } from '../state/index';
@@ -36,14 +36,14 @@ export async function createMint(
     confirmOptions?: ConfirmOptions,
     programId = TOKEN_PROGRAM_ID
 ): Promise<PublicKey> {
-    const lamports = await getMinimumBalanceForRentExemptMint(connection);
+    const daltons = await getMinimumBalanceForRentExemptMint(connection);
 
     const transaction = new Transaction().add(
         SystemProgram.createAccount({
             fromPubkey: payer.publicKey,
             newAccountPubkey: keypair.publicKey,
             space: MINT_SIZE,
-            lamports,
+            daltons,
             programId,
         }),
         createInitializeMintInstruction(keypair.publicKey, decimals, mintAuthority, freezeAuthority, programId)

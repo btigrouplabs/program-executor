@@ -1,5 +1,5 @@
-import { struct, u8 } from '@solana/buffer-layout';
-import { PublicKey, TransactionInstruction, SystemProgram } from '@solana/web3.js';
+import { struct, u8 } from '@bbachain/buffer-layout';
+import { PublicKey, TransactionInstruction, SystemProgram } from '@bbachain/web3.js';
 import { TOKEN_2022_PROGRAM_ID, NATIVE_MINT_2022 } from '../constants';
 import { TokenInstruction } from './types';
 import { TokenUnsupportedInstructionError } from '../errors';

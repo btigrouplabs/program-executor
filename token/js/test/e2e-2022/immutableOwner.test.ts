@@ -10,7 +10,7 @@ import {
     SystemProgram,
     Transaction,
     sendAndConfirmTransaction,
-} from '@solana/web3.js';
+} from '@bbachain/web3.js';
 
 import {
     AuthorityType,
@@ -50,7 +50,7 @@ describe('immutableOwner', () => {
         );
         owner = Keypair.generate();
         const accountLen = getAccountLen(EXTENSIONS);
-        const lamports = await connection.getMinimumBalanceForRentExemption(accountLen);
+        const daltons = await connection.getMinimumBalanceForRentExemption(accountLen);
         const accountKeypair = Keypair.generate();
         account = accountKeypair.publicKey;
         const transaction = new Transaction().add(
@@ -58,7 +58,7 @@ describe('immutableOwner', () => {
                 fromPubkey: payer.publicKey,
                 newAccountPubkey: account,
                 space: accountLen,
-                lamports,
+                daltons,
                 programId: TEST_PROGRAM_ID,
             }),
             createInitializeImmutableOwnerInstruction(account, TEST_PROGRAM_ID),

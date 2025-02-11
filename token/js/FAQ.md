@@ -4,6 +4,6 @@
 
 ## How can I get support?
 
-Please ask questions in the #developer-support channel on the Solana Discord: https://discord.com/invite/solana
+Please ask questions in the #developer-support channel on the BBAChain Discord: https://discord.com/invite/bbachain
 
-After reading this FAQ, if you've found a bug or you'd like to request a feature, please [open an issue](https://github.com/solana-labs/solana-program-library/issues/new).
+After reading this FAQ, if you've found a bug or you'd like to request a feature, please [open an issue](https://github.com/bbachain/program-executor/issues/new).

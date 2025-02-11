@@ -6,7 +6,7 @@ import {
     Signer,
     Transaction,
     TransactionSignature,
-} from '@solana/web3.js';
+} from '@bbachain/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants';
 import { createFreezeAccountInstruction } from '../instructions/index';
 import { getSigners } from './internal';

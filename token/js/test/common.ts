@@ -1,9 +1,9 @@
-import { PublicKey, Keypair, Connection, Signer } from '@solana/web3.js';
+import { PublicKey, Keypair, Connection, Signer } from '@bbachain/web3.js';
 import { TOKEN_PROGRAM_ID } from '../src';
 
-export async function newAccountWithLamports(connection: Connection, lamports = 1000000): Promise<Signer> {
+export async function newAccountWithLamports(connection: Connection, daltons = 1000000): Promise<Signer> {
     const account = Keypair.generate();
-    const signature = await connection.requestAirdrop(account.publicKey, lamports);
+    const signature = await connection.requestAirdrop(account.publicKey, daltons);
     await connection.confirmTransaction(signature);
     return account;
 }

@@ -6,12 +6,12 @@ import {
     Signer,
     Transaction,
     TransactionSignature,
-} from '@solana/web3.js';
+} from '@bbachain/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants';
 import { createSyncNativeInstruction } from '../instructions/index';
 
 /**
- * Sync the balance of a native SPL token account to the underlying system account's lamports
+ * Sync the balance of a native SPL token account to the underlying system account's daltons
  *
  * @param connection     Connection to use
  * @param payer          Payer of the transaction fees

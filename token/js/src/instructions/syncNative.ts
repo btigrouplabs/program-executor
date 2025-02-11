@@ -1,5 +1,5 @@
-import { struct, u8 } from '@solana/buffer-layout';
-import { AccountMeta, PublicKey, TransactionInstruction } from '@solana/web3.js';
+import { struct, u8 } from '@bbachain/buffer-layout';
+import { AccountMeta, PublicKey, TransactionInstruction } from '@bbachain/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants';
 import {
     TokenInvalidInstructionDataError,
@@ -20,7 +20,7 @@ export const syncNativeInstructionData = struct<SyncNativeInstructionData>([u8('
 /**
  * Construct a SyncNative instruction
  *
- * @param account   Native account to sync lamports from
+ * @param account   Native account to sync daltons from
  * @param programId SPL Token program account
  *
  * @return Instruction to add to a transaction

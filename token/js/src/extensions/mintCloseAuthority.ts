@@ -1,6 +1,6 @@
-import { struct } from '@solana/buffer-layout';
-import { publicKey } from '@solana/buffer-layout-utils';
-import { PublicKey } from '@solana/web3.js';
+import { struct } from '@bbachain/buffer-layout';
+import { publicKey } from '@bbachain/buffer-layout-utils';
+import { PublicKey } from '@bbachain/web3.js';
 import { Mint } from '../state/mint';
 import { ExtensionType, getExtensionData } from './extensionType';
 

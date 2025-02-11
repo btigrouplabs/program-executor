@@ -1,5 +1,5 @@
-import { struct, u8 } from '@solana/buffer-layout';
-import { AccountMeta, PublicKey, SYSVAR_RENT_PUBKEY, TransactionInstruction } from '@solana/web3.js';
+import { struct, u8 } from '@bbachain/buffer-layout';
+import { AccountMeta, PublicKey, SYSVAR_RENT_PUBKEY, TransactionInstruction } from '@bbachain/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants';
 import {
     TokenInvalidInstructionDataError,

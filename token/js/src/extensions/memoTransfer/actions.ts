@@ -6,7 +6,7 @@ import {
     Signer,
     Transaction,
     TransactionSignature,
-} from '@solana/web3.js';
+} from '@bbachain/web3.js';
 import { TOKEN_2022_PROGRAM_ID } from '../../constants';
 import {
     createEnableRequiredMemoTransfersInstruction,

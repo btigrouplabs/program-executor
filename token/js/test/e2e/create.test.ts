@@ -1,4 +1,4 @@
-import { Connection, Keypair, PublicKey, Signer } from '@solana/web3.js';
+import { Connection, Keypair, PublicKey, Signer } from '@bbachain/web3.js';
 
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';

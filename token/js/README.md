@@ -1,10 +1,10 @@
-# `@solana/spl-token`
+# `@bbachain/spl-token`
 
 A TypeScript library for interacting with the SPL Token program.
 
 ## Links
 
-- [TypeScript Docs](https://solana-labs.github.io/solana-program-library/token/js/)
+- [TypeScript Docs](https://bbachain.github.io/program-executor/token/js/)
 - [FAQ (Frequently Asked Questions)](./FAQ.md)
 - [Install](#install)
 - [Build from Source](#build-from-source)
@@ -12,19 +12,19 @@ A TypeScript library for interacting with the SPL Token program.
 ## Install
 
 ```shell
-yarn add @solana/spl-token
+yarn add @bbachain/spl-token
 ```
 
 ## Build from Source
 
 1. Clone the project:
 ```shell
-git clone https://github.com/solana-labs/solana-program-library.git
+git clone https://github.com/bbachain/program-executor.git
 ```
 
 2. Navigate to the library:
 ```shell
-cd solana-program-library/token/js
+cd program-executor/token/js
 ```
 
 3. Install the dependencies:

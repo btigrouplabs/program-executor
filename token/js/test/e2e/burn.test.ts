@@ -2,7 +2,7 @@ import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 
-import { Connection, Keypair, PublicKey, Signer } from '@solana/web3.js';
+import { Connection, Keypair, PublicKey, Signer } from '@bbachain/web3.js';
 import { createMint, createAccount, getAccount, mintTo, burn, burnChecked } from '../../src';
 import { TEST_PROGRAM_ID, newAccountWithLamports, getConnection } from '../common';
 

@@ -7,7 +7,7 @@ import {
     Signer,
     SystemProgram,
     Transaction,
-} from '@solana/web3.js';
+} from '@bbachain/web3.js';
 import { getSigners } from '../../actions/internal';
 import { TOKEN_2022_PROGRAM_ID } from '../../constants';
 import { createInitializeMintInstruction } from '../../instructions';
@@ -46,13 +46,13 @@ export async function createInterestBearingMint(
     programId = TOKEN_2022_PROGRAM_ID
 ): Promise<PublicKey> {
     const mintLen = getMintLen([ExtensionType.InterestBearingMint]);
-    const lamports = await connection.getMinimumBalanceForRentExemption(mintLen);
+    const daltons = await connection.getMinimumBalanceForRentExemption(mintLen);
     const transaction = new Transaction().add(
         SystemProgram.createAccount({
             fromPubkey: payer.publicKey,
             newAccountPubkey: keypair.publicKey,
             space: mintLen,
-            lamports,
+            daltons,
             programId,
         }),
         createInitializeInterestBearingMintInstruction(keypair.publicKey, rateAuthority, rate, programId),

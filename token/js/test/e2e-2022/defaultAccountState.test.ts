@@ -10,7 +10,7 @@ import {
     Signer,
     SystemProgram,
     Transaction,
-} from '@solana/web3.js';
+} from '@bbachain/web3.js';
 import {
     AccountState,
     createAccount,
@@ -44,14 +44,14 @@ describe('defaultAccountState', () => {
         const mintKeypair = Keypair.generate();
         mint = mintKeypair.publicKey;
         const mintLen = getMintLen(EXTENSIONS);
-        const lamports = await connection.getMinimumBalanceForRentExemption(mintLen);
+        const daltons = await connection.getMinimumBalanceForRentExemption(mintLen);
 
         const transaction = new Transaction().add(
             SystemProgram.createAccount({
                 fromPubkey: payer.publicKey,
                 newAccountPubkey: mint,
                 space: mintLen,
-                lamports,
+                daltons,
                 programId: TEST_PROGRAM_ID,
             }),
             createInitializeDefaultAccountStateInstruction(mint, TEST_STATE, TEST_PROGRAM_ID),

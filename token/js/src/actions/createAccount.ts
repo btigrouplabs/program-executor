@@ -7,7 +7,7 @@ import {
     Signer,
     SystemProgram,
     Transaction,
-} from '@solana/web3.js';
+} from '@bbachain/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants';
 import { createInitializeAccountInstruction } from '../instructions/index';
 import { getMint } from '../state/index';
@@ -42,14 +42,14 @@ export async function createAccount(
     // Otherwise, create the account with the provided keypair and return its public key
     const mintState = await getMint(connection, mint, confirmOptions?.commitment, programId);
     const space = getAccountLenForMint(mintState);
-    const lamports = await connection.getMinimumBalanceForRentExemption(space);
+    const daltons = await connection.getMinimumBalanceForRentExemption(space);
 
     const transaction = new Transaction().add(
         SystemProgram.createAccount({
             fromPubkey: payer.publicKey,
             newAccountPubkey: keypair.publicKey,
             space,
-            lamports,
+            daltons,
             programId,
         }),
         createInitializeAccountInstruction(keypair.publicKey, mint, owner, programId)

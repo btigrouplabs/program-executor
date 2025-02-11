@@ -1,4 +1,4 @@
-import { struct } from '@solana/buffer-layout';
+import { struct } from '@bbachain/buffer-layout';
 import { Mint } from '../state/mint';
 import { ExtensionType, getExtensionData } from './extensionType';
 

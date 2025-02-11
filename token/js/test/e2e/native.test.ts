@@ -10,7 +10,7 @@ import {
     Transaction,
     SystemProgram,
     sendAndConfirmTransaction,
-} from '@solana/web3.js';
+} from '@bbachain/web3.js';
 import {
     NATIVE_MINT,
     NATIVE_MINT_2022,
@@ -64,10 +64,10 @@ describe('native', () => {
         const preInfo = await connection.getAccountInfo(account);
         expect(preInfo).to.not.be.null;
         if (preInfo != null) {
-            balance = preInfo.lamports;
+            balance = preInfo.daltons;
         }
 
-        // transfer lamports into the native account
+        // transfer daltons into the native account
         const additionalLamports = 100;
         await sendAndConfirmTransaction(
             connection,
@@ -75,7 +75,7 @@ describe('native', () => {
                 SystemProgram.transfer({
                     fromPubkey: payer.publicKey,
                     toPubkey: account,
-                    lamports: additionalLamports,
+                    daltons: additionalLamports,
                 })
             ),
             [payer]
@@ -86,11 +86,11 @@ describe('native', () => {
         expect(preAccountInfo.isNative).to.be.true;
         expect(preAccountInfo.amount).to.eql(BigInt(amount));
 
-        // but change in lamports
+        // but change in daltons
         const postInfo = await connection.getAccountInfo(account);
         expect(postInfo).to.not.be.null;
         if (postInfo !== null) {
-            expect(postInfo.lamports).to.eql(balance + additionalLamports);
+            expect(postInfo.daltons).to.eql(balance + additionalLamports);
         }
 
         // sync, amount changes
@@ -104,7 +104,7 @@ describe('native', () => {
         const preInfo = await connection.getAccountInfo(account);
         expect(preInfo).to.not.be.null;
         if (preInfo != null) {
-            balance = preInfo.lamports;
+            balance = preInfo.daltons;
         }
         const destination = Keypair.generate().publicKey;
         await closeAccount(connection, payer, account, destination, owner, [], undefined, TEST_PROGRAM_ID);
@@ -113,7 +113,7 @@ describe('native', () => {
         const destinationInfo = await connection.getAccountInfo(destination);
         expect(destinationInfo).to.not.be.null;
         if (destinationInfo != null) {
-            expect(destinationInfo.lamports).to.eql(balance);
+            expect(destinationInfo.daltons).to.eql(balance);
         }
     });
 });

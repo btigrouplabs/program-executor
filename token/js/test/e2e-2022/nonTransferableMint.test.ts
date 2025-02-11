@@ -10,7 +10,7 @@ import {
     Signer,
     SystemProgram,
     Transaction,
-} from '@solana/web3.js';
+} from '@bbachain/web3.js';
 import {
     createInitializeMintInstruction,
     createInitializeNonTransferableMintInstruction,
@@ -42,14 +42,14 @@ describe('nonTransferable', () => {
         const mintKeypair = Keypair.generate();
         mint = mintKeypair.publicKey;
         const mintLen = getMintLen(EXTENSIONS);
-        const lamports = await connection.getMinimumBalanceForRentExemption(mintLen);
+        const daltons = await connection.getMinimumBalanceForRentExemption(mintLen);
 
         const transaction = new Transaction().add(
             SystemProgram.createAccount({
                 fromPubkey: payer.publicKey,
                 newAccountPubkey: mint,
                 space: mintLen,
-                lamports,
+                daltons,
                 programId: TEST_PROGRAM_ID,
             }),
             createInitializeNonTransferableMintInstruction(mint, TEST_PROGRAM_ID),
@@ -65,7 +65,7 @@ describe('nonTransferable', () => {
 
         const owner = Keypair.generate();
         const accountLen = getAccountLen([ExtensionType.ImmutableOwner]);
-        const lamports = await connection.getMinimumBalanceForRentExemption(accountLen);
+        const daltons = await connection.getMinimumBalanceForRentExemption(accountLen);
 
         const sourceKeypair = Keypair.generate();
         const source = sourceKeypair.publicKey;
@@ -74,7 +74,7 @@ describe('nonTransferable', () => {
                 fromPubkey: payer.publicKey,
                 newAccountPubkey: source,
                 space: accountLen,
-                lamports,
+                daltons,
                 programId: TEST_PROGRAM_ID,
             }),
             createInitializeImmutableOwnerInstruction(source, TEST_PROGRAM_ID),
@@ -89,7 +89,7 @@ describe('nonTransferable', () => {
                 fromPubkey: payer.publicKey,
                 newAccountPubkey: destination,
                 space: accountLen,
-                lamports,
+                daltons,
                 programId: TEST_PROGRAM_ID,
             }),
             createInitializeImmutableOwnerInstruction(destination, TEST_PROGRAM_ID),

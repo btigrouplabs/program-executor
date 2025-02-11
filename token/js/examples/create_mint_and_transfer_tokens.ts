@@ -1,13 +1,13 @@
-import { clusterApiUrl, Connection, Keypair, LAMPORTS_PER_SOL } from '@solana/web3.js';
-import { createMint, getOrCreateAssociatedTokenAccount, mintTo, transfer } from '../src'; // @FIXME: replace with @solana/spl-token
+import { BBA_DALTON_UNIT, clusterApiUrl, Connection, Keypair } from '@bbachain/web3.js';
+import { createMint, getOrCreateAssociatedTokenAccount, mintTo, transfer } from '../src'; // @FIXME: replace with @bbachain/spl-token
 
 (async () => {
     // Connect to cluster
-    const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+    const connection = new Connection(clusterApiUrl('testnet'), 'confirmed');
 
-    // Generate a new wallet keypair and airdrop SOL
+    // Generate a new wallet keypair and airdrop BBA
     const fromWallet = Keypair.generate();
-    const fromAirdropSignature = await connection.requestAirdrop(fromWallet.publicKey, LAMPORTS_PER_SOL);
+    const fromAirdropSignature = await connection.requestAirdrop(fromWallet.publicKey, BBA_DALTON_UNIT);
 
     // Wait for airdrop confirmation
     await connection.confirmTransaction(fromAirdropSignature);

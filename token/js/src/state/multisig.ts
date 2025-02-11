@@ -1,6 +1,6 @@
-import { struct, u8 } from '@solana/buffer-layout';
-import { bool, publicKey } from '@solana/buffer-layout-utils';
-import { Commitment, Connection, PublicKey } from '@solana/web3.js';
+import { struct, u8 } from '@bbachain/buffer-layout';
+import { bool, publicKey } from '@bbachain/buffer-layout-utils';
+import { Commitment, Connection, PublicKey } from '@bbachain/web3.js';
 import { TOKEN_PROGRAM_ID } from '../constants';
 import { TokenAccountNotFoundError, TokenInvalidAccountOwnerError, TokenInvalidAccountSizeError } from '../errors';
 
@@ -76,12 +76,12 @@ export async function getMultisig(
     return { address, ...MultisigLayout.decode(info.data) };
 }
 
-/** Get the minimum lamport balance for a multisig to be rent exempt
+/** Get the minimum dalton balance for a multisig to be rent exempt
  *
  * @param connection Connection to use
  * @param commitment Desired level of commitment for querying the state
  *
- * @return Amount of lamports required
+ * @return Amount of daltons required
  */
 export async function getMinimumBalanceForRentExemptMultisig(
     connection: Connection,

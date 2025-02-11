@@ -1,4 +1,4 @@
-import { Keypair } from '@solana/web3.js';
+import { Keypair } from '@bbachain/web3.js';
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import { createInitializeMintCloseAuthorityInstruction, TOKEN_2022_PROGRAM_ID } from '../../src';
